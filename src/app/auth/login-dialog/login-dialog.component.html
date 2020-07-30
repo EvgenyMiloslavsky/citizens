@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Log In Form </h1>
+<div mat-dialog-content>
+  <!--  <p>What's your favorite animal?</p>-->
+  <form [formGroup]="form">
+    <mat-form-field>
+      <!--      <mat-label>E-mail</mat-label>-->
+      <input matInput type="email" formControlName="email" placeholder="Email">
+      <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <!--      <mat-label>Password</mat-label>-->
+      <input matInput type="password" formControlName="password" placeholder="Password">
+      <mat-error *ngIf="password.invalid">{{getPasswordEmailErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<mat-progress-bar *ngIf="onProgress" mode="indeterminate"></mat-progress-bar>
+
+<div mat-dialog-actions>
+  <button
+    fxFlex=""
+    mat-raised-button
+    color="primary"
+    [disabled]="!form.valid"
+    autofocus
+    (click)="onLogin()"
+    cdkFocusInitial
+  >Login
+  </button>
+</div>

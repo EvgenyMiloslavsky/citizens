@@ -1,0 +1,55 @@
+<div class="welcome" fxLayout fxLayoutAlign="center center" style="height: 100%">
+  <!--<div class="welcome" fxLayout="column" fxLayout.gt-md="raw" fxFlex="100" fxLayoutAlign="center center" fxLayoutGap.gt-md="20px">-->
+  <section fxLayoutAlign="center center" fxFlex="">
+
+    <mat-selection-list #shoes [multiple]="false" fxFlex="60">
+      <mat-list-option *ngFor="let citizen of citizens">
+        {{citizen.name}} {{citizen.surName}}
+        <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
+      </mat-list-option>
+    </mat-selection-list>
+
+    <!--
+        <tbody>
+        <ul>
+          <li *ngFor="let citizen of citizens">
+            id: {{citizen.id}}<br>
+            name: {{citizen.name}}<br>
+            surName: {{citizen.surName}}
+          </li>
+        </ul>
+        </tbody>
+    -->
+  </section>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-accordion fxFlex="60">
+    <mat-expansion-panel hideToggle fxLayout="column" >
+      <mat-expansion-panel-header [collapsedHeight]="'70px'" [expandedHeight]="'70px'">
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+        </mat-panel-description>
+
+        <mat-icon>account_circle</mat-icon>
+
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" min="1">
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="primary">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -1,0 +1,16 @@
+<mat-sidenav-container class="example-container background" style="height: 100vh">
+  <mat-sidenav #sidenav mode="over" role="navigation" (click)="sidenav.close()">
+    <app-sidenav ></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <header>
+
+    <app-header (onToggle)="sidenav.toggle()"></app-header>
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+<!--      <app-citizens></app-citizens>-->
+<!--      <app-login-dialog></app-login-dialog>-->
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

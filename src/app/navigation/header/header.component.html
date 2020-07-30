@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="onToggle.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div fxFlex="" fxLayoutAlign="end center" fxLayout="row" fxLayoutGap="20px">
+      <button mat-raised-button >Add Citizen</button>
+<!--      <button mat-raised-button fxLayoutGap="20" routerLink="login" >Log In</button>-->
+      <button mat-raised-button fxLayoutGap="20" (click)="openLogInDialog()" >Log In</button>
+    </div>
+  </mat-toolbar-row>
+
+
+</mat-toolbar>
