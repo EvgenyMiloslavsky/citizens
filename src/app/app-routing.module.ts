@@ -4,11 +4,15 @@ import {CitizensListComponent} from './citizens/citizens-list/citizens-list.comp
 
 
 const routes: Routes = [
-  {path: 'citizen', component: CitizensListComponent},
+  {
+    path: 'citizen',
+    component: CitizensListComponent
+  },
   {
     path: 'login',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  }
+  },
+  {path: '**', component: CitizensListComponent}
 ];
 
 @NgModule({

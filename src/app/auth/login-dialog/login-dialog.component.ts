@@ -6,6 +6,9 @@ import {SpinnerService} from '../../services/spinner.service';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
+import {login} from '../auth.actions';
+import {User} from 'firebase';
+
 
 @Component({
   selector: 'app-login-dialog',
@@ -63,16 +66,19 @@ export class LoginDialogComponent {
   onLogin() {
     this.authService.LogIn(this.email.value, this.password.value).then(
       result => {
-        this.store.dispatch(
-          {
-            type: 'Login Action',
-            payload: {
-              userProfile: result
-            }
-          }
+        this.spinnerService.show();
+        this.store.dispatch( login({})
         );
-        console.log(`Result ${result.user}`);
-        this.router.navigateByUrl('/citizen');
+
+        setTimeout(
+          () => {
+            this.spinnerService.hide();
+            console.log(`Result ${result.user.uid}`);
+            this.router.navigateByUrl('/citizen');
+            this.dialogRef.close();
+          },
+          5000
+        );
       }
     ).catch(err => {
       this.spinnerService.hide();

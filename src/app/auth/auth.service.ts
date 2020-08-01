@@ -21,7 +21,7 @@ export class AuthService {
   ) {
   }
 
-  LogIn(email: string, password: string): Promise<any>{
+  LogIn(email: string, password: string){
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 /*
