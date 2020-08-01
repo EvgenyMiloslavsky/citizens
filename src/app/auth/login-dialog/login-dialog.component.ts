@@ -7,8 +7,7 @@ import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
-import {User} from 'firebase';
-
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-login-dialog',
@@ -29,6 +28,8 @@ export class LoginDialogComponent {
   );
 
   onProgress = false;
+
+  // user = new User();
   // onProgress = this.spinnerService.visibility.subscribe(vis=>
   // );
 
@@ -63,11 +64,11 @@ export class LoginDialogComponent {
     }
   }
 
-  onLogin() {
+  /*onLogin() {
     this.authService.LogIn(this.email.value, this.password.value).then(
       result => {
         this.spinnerService.show();
-        this.store.dispatch( login({})
+        this.store.dispatch(login({})
         );
 
         setTimeout(
@@ -84,5 +85,24 @@ export class LoginDialogComponent {
       this.spinnerService.hide();
       console.log(`Auth Error ${err}`);
     });
+  }*/
+
+  onLogin() {
+    this.authService.LogIn(this.email.value, this.password.value).subscribe(
+      res => {
+        this.spinnerService.show()
+        setTimeout(
+          () => {
+            this.spinnerService.hide();
+            console.log(`Result ${res.email}`);
+            this.router.navigateByUrl('/citizen');
+            this.dialogRef.close();
+          },
+          5000
+        );
+
+        // console.log(res.email);
+      }
+    );
   }
 }

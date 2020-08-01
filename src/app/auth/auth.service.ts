@@ -1,10 +1,11 @@
 import {Inject, Injectable, NgZone} from '@angular/core';
-import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {SpinnerService} from '../services/spinner.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {LoginDialogComponent} from './login-dialog/login-dialog.component';
-import {timeInterval} from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {FirebaseApp, FirebaseAppConfig} from '@angular/fire';
+import {environment} from '../../environments/environment';
+import {User} from '../models/user.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -12,45 +13,58 @@ import {Observable} from 'rxjs';
 })
 export class AuthService {
 
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
+
   constructor(
     private afAuth: AngularFireAuth,
-    private router: Router,
-    private spinnerService: SpinnerService,
-    private ngZone: NgZone,
-    public dialogRef: MatDialogRef<LoginDialogComponent>
+    // public dialogRef: MatDialogRef<LoginDialogComponent>,
+    private http: HttpClient
   ) {
   }
 
-  LogIn(email: string, password: string){
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  /* LogIn(email: string, password: string){
+     return this.afAuth.signInWithEmailAndPassword(email, password);
+   }
+ */
+
+
+  LogIn(email: string, password: string): Observable<any> {
+    return this.http.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`,
+      `{"email":"${email}","password":"${password}","returnSecureToken":true}`,
+      {headers: this.headers, },
+    );
   }
-/*
-  LogIn(email: string, password: string) {
-    this.spinnerService.show();
-    this.afAuth.signInWithEmailAndPassword(email, password).then(
-      result => {
-        setTimeout(() => {
-            this.spinnerService.hide();
-            this.router.navigate(['s']);
-            this.ngZone.run(() => {
-              this.dialogRef.close();
 
-            });
+  /*
+    LogIn(email: string, password: string) {
+      this.spinnerService.show();
+      this.afAuth.signInWithEmailAndPassword(email, password).then(
+        result => {
+          setTimeout(() => {
+              this.spinnerService.hide();
+              this.router.navigate(['s']);
+              this.ngZone.run(() => {
+                this.dialogRef.close();
 
-          }
-          , 5000
-        );
-        /!*
-*!/
-        // this.dialogRef.close();
-        console.log(`Result ${result}`);
-      }
-    ).catch(err => {
-      this.spinnerService.hide();
-      console.log(`Auth Error ${err}`);
-    });
-    return true;
+              });
 
-  }
-*/
+            }
+            , 5000
+          );
+          /!*
+  *!/
+          // this.dialogRef.close();
+          console.log(`Result ${result}`);
+        }
+      ).catch(err => {
+        this.spinnerService.hide();
+        console.log(`Auth Error ${err}`);
+      });
+      return true;
+
+    }
+  */
 }

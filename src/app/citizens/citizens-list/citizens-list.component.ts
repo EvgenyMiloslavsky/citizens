@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CitizensService} from '../../services/citizens.service';
-import {Citizen} from '../citizen.model.ts';
+import {Citizen} from '../../models/citizen.model';
 
 @Component({
   selector: 'app-citizens',

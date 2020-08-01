@@ -20,6 +20,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {AuthModule} from './auth/auth.module';
 import {reducers} from './reducers';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {reducers} from './reducers';
     StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     ReactiveFormsModule,
-    AuthModule.forRoot()
+    AuthModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
