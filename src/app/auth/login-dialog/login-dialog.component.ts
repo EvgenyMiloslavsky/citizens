@@ -7,7 +7,8 @@ import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
-import {User} from '../../models/user.model';
+import {tap} from 'rxjs/operators';
+import {noop} from 'rxjs';
 
 @Component({
   selector: 'app-login-dialog',
@@ -18,16 +19,18 @@ export class LoginDialogComponent {
 
   form: FormGroup;
   email: FormControl = new FormControl(
-    '',
+    'test@test.com',
     [Validators.required,
       Validators.email]);
   password: FormControl = new FormControl(
-    '',
+    'test_test',
     [Validators.required,
       Validators.minLength(8)]
   );
 
   onProgress = false;
+  requestError = false;
+
 
   // user = new User();
   // onProgress = this.spinnerService.visibility.subscribe(vis=>
@@ -64,44 +67,28 @@ export class LoginDialogComponent {
     }
   }
 
-  /*onLogin() {
-    this.authService.LogIn(this.email.value, this.password.value).then(
-      result => {
-        this.spinnerService.show();
-        this.store.dispatch(login({})
-        );
-
-        setTimeout(
-          () => {
-            this.spinnerService.hide();
-            console.log(`Result ${result.user.uid}`);
-            this.router.navigateByUrl('/citizen');
-            this.dialogRef.close();
-          },
-          5000
-        );
-      }
-    ).catch(err => {
-      this.spinnerService.hide();
-      console.log(`Auth Error ${err}`);
-    });
-  }*/
-
   onLogin() {
-    this.authService.LogIn(this.email.value, this.password.value).subscribe(
-      res => {
-        this.spinnerService.show()
-        setTimeout(
-          () => {
-            this.spinnerService.hide();
-            console.log(`Result ${res.email}`);
-            this.router.navigateByUrl('/citizen');
-            this.dialogRef.close();
-          },
-          5000
-        );
+    this.authService.LogIn(this.email.value, this.password.value)
+      .pipe(
+        tap(user => {
+          this.spinnerService.show();
+          this.store.dispatch(login({user})
+          );
 
-        // console.log(res.email);
+          setTimeout(
+            () => {
+              this.spinnerService.hide();
+              console.log(`Result ${user.email}`);
+              this.router.navigateByUrl('/citizen');
+              this.dialogRef.close();
+            }, 5000
+          );
+        })
+      ).subscribe(
+      noop,
+      () => {
+        console.log(`Login Failed`);
+        this.requestError = true;
       }
     );
   }

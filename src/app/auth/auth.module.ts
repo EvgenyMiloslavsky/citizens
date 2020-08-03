@@ -15,7 +15,7 @@ import {AuthService} from './auth.service';
   imports: [
     CommonModule,
     SharedModule,
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
     RouterModule.forChild([{path: '', component: LoginComponent}])
   ]
 })

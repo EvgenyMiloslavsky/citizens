@@ -1,6 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {LoginDialogComponent} from '../../auth/login-dialog/login-dialog.component';
+import {AppState} from '../../reducers';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {isLoggedIn, isLoggedOut} from '../../auth/auth.selectors';
+import {logout} from '../../auth/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +16,27 @@ import {LoginDialogComponent} from '../../auth/login-dialog/login-dialog.compone
 export class HeaderComponent implements OnInit {
   @Output() onToggle = new EventEmitter<any>();
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    private store: Store<AppState>) {
   }
 
+  isLoggedIn$: Observable<boolean>;
+  isLoggedOut$: Observable<boolean>;
+
   ngOnInit(): void {
+    this.isLoggedIn$ = this.store
+      .pipe(
+        select(isLoggedIn)
+      );
+
+
+    this.isLoggedOut$ = this.store
+      .pipe(
+        select(isLoggedOut)
+      );
+
+
   }
 
   openLogInDialog() {
@@ -28,5 +51,9 @@ export class HeaderComponent implements OnInit {
     dialogConfig.width = '350px';
 
     this.dialog.open(LoginDialogComponent, dialogConfig);
+  }
+
+  logout() {
+    this.store.dispatch(logout());
   }
 }

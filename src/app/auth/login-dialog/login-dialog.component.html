@@ -4,18 +4,19 @@
   <form [formGroup]="form">
     <mat-form-field>
       <!--      <mat-label>E-mail</mat-label>-->
-      <input matInput type="email" formControlName="email" placeholder="Email">
+      <input matInput type="email" formControlName="email" placeholder="Email" (focus)="requestError=false">
       <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <!--      <mat-label>Password</mat-label>-->
-      <input matInput type="password" formControlName="password" placeholder="Password">
+      <input matInput type="password" formControlName="password" placeholder="Password" (focus)="requestError=false">
       <mat-error *ngIf="password.invalid">{{getPasswordEmailErrorMessage()}}</mat-error>
     </mat-form-field>
   </form>
 </div>
 
 <mat-progress-bar *ngIf="onProgress" mode="indeterminate"></mat-progress-bar>
+<mat-error *ngIf="requestError">Wrong email or password</mat-error>
 
 <div mat-dialog-actions>
   <button
@@ -25,7 +26,6 @@
     [disabled]="!form.valid"
     autofocus
     (click)="onLogin()"
-    cdkFocusInitial
   >Login
   </button>
 </div>

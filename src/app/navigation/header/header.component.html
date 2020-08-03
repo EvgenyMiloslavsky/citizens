@@ -4,9 +4,10 @@
       <mat-icon>menu</mat-icon>
     </button>
     <div fxFlex="" fxLayoutAlign="end center" fxLayout="row" fxLayoutGap="20px">
-      <button mat-raised-button >Add Citizen</button>
-<!--      <button mat-raised-button fxLayoutGap="20" routerLink="login" >Log In</button>-->
-      <button mat-raised-button fxLayoutGap="20" (click)="openLogInDialog()" >Log In</button>
+      <button mat-raised-button>Add Citizen</button>
+      <!--      <button mat-raised-button fxLayoutGap="20" routerLink="login" >Log In</button>-->
+      <button mat-raised-button fxLayoutGap="20" (click)="openLogInDialog()" *ngIf="isLoggedOut$ | async">Log In</button>
+      <button mat-raised-button fxLayoutGap="20" (click)="logout()" *ngIf="isLoggedIn$ | async">Log Out</button>
     </div>
   </mat-toolbar-row>
 
