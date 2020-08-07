@@ -17,10 +17,10 @@ import {LoginDialogComponent} from './auth/login-dialog/login-dialog.component';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {AuthModule} from './auth/auth.module';
 import {reducers} from './reducers';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {EffectsModule} from '@ngrx/effects';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     HeaderComponent,
     SidenavComponent,
     CitizensListComponent,
-    LoginDialogComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +43,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     ReactiveFormsModule,
     AuthModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

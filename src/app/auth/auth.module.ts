@@ -2,11 +2,13 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SharedModule} from '../modules/shared.module';
 import {RouterModule} from '@angular/router';
-import {LoginDialogComponent} from './login-dialog/login-dialog.component';
 import {StoreModule} from '@ngrx/store';
 import * as fromAuth from './reducers';
 import {LoginComponent} from './login/login.component';
 import {AuthService} from './auth.service';
+import {AuthGuard} from './auth.guard';
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffects} from './auth.effects';
 
 
 @NgModule({
@@ -16,14 +18,18 @@ import {AuthService} from './auth.service';
     CommonModule,
     SharedModule,
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
-    RouterModule.forChild([{path: '', component: LoginComponent}])
+    RouterModule.forChild([{path: '', component: LoginComponent}]),
+    EffectsModule.forFeature([AuthEffects])
   ]
 })
 export class AuthModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders <AuthModule>{
     return {
       ngModule: AuthModule,
-      providers: [AuthService]
+      providers: [
+        AuthService,
+        AuthGuard
+      ]
     };
   }
 }

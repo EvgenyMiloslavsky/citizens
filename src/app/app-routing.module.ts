@@ -1,18 +1,24 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {CitizensListComponent} from './citizens/citizens-list/citizens-list.component';
+import {AuthGuard} from './auth/auth.guard';
+import {LoginComponent} from './auth/login/login.component';
 
 
 const routes: Routes = [
   {
     path: 'citizen',
-    component: CitizensListComponent
+    loadChildren: () => import('./citizens/citizens.module').then(m => m.CitizensModule),
+    canActivate: [AuthGuard]
   },
+/*
   {
     path: 'login',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    component: LoginComponent
+/!*    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)*!/
   },
-  {path: '**', component: CitizensListComponent}
+*/
+  {path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
