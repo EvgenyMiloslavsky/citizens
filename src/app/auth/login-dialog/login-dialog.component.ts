@@ -81,7 +81,7 @@ export class LoginDialogComponent {
               console.log(`Result ${user.email}`);
               this.router.navigateByUrl('/citizen');
               this.dialogRef.close();
-            }, 5000
+            }, 3000
           );
         })
       ).subscribe(

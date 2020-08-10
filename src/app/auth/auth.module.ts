@@ -6,9 +6,9 @@ import {StoreModule} from '@ngrx/store';
 import * as fromAuth from './reducers';
 import {LoginComponent} from './login/login.component';
 import {AuthService} from './auth.service';
-// import {AuthGuard} from './auth.guard';
+import {AuthGuard} from './auth.guard';
 import {EffectsModule} from '@ngrx/effects';
-// import {AuthEffects} from './auth.effects';
+import {AuthEffects} from './auth.effects';
 
 
 @NgModule({
