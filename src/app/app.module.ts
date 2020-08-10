@@ -18,9 +18,10 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthModule} from './auth/auth.module';
-import {reducers} from './reducers';
+import {metaReducers, reducers} from './reducers';
 import {HttpClientModule} from '@angular/common/http';
 import {EffectsModule} from '@ngrx/effects';
+import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 
 
 @NgModule({
@@ -39,12 +40,24 @@ import {EffectsModule} from '@ngrx/effects';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FlexLayoutModule,
     SharedModule,
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true
+      }
+    }),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     ReactiveFormsModule,
     AuthModule.forRoot(),
     HttpClientModule,
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import {FirebaseApp, FirebaseAppConfig} from '@angular/fire';
 import {environment} from '../../environments/environment';
 import {User} from '../models/user.model';
 import {Observable} from 'rxjs';
+import {Citizen} from '../models/citizen.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +32,14 @@ export class AuthService {
 
 
   LogIn(email: string, password: string): Observable<any> {
+
     return this.http.post(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`,
       `{"email":"${email}","password":"${password}","returnSecureToken":true}`,
-      {headers: this.headers, },
+      {headers: this.headers,},
     );
   }
+
 
   /*
     LogIn(email: string, password: string) {

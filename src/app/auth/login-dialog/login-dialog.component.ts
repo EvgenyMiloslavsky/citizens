@@ -9,6 +9,7 @@ import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
 import {tap} from 'rxjs/operators';
 import {noop} from 'rxjs';
+import {Citizen} from '../../models/citizen.model';
 
 @Component({
   selector: 'app-login-dialog',
@@ -72,12 +73,11 @@ export class LoginDialogComponent {
       .pipe(
         tap(user => {
           this.spinnerService.show();
-          this.store.dispatch(login({user})
-          );
 
           setTimeout(
             () => {
               this.spinnerService.hide();
+              this.store.dispatch(login({user}));
               console.log(`Result ${user.email}`);
               this.router.navigateByUrl('/citizen');
               this.dialogRef.close();
