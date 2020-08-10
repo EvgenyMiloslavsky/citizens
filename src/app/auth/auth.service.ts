@@ -5,9 +5,9 @@ import {LoginDialogComponent} from './login-dialog/login-dialog.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FirebaseApp, FirebaseAppConfig} from '@angular/fire';
 import {environment} from '../../environments/environment';
-import {User} from '../models/user.model';
+// import {User} from '../models/user.model';
 import {Observable} from 'rxjs';
-import {Citizen} from '../models/citizen.model';
+// import {Citizen} from '../models/citizen.model';
 
 @Injectable({
   providedIn: 'root'
