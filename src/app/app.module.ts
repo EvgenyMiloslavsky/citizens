@@ -29,7 +29,6 @@ import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
     AppComponent,
     HeaderComponent,
     SidenavComponent,
-    CitizensListComponent,
     LoginDialogComponent
   ],
   imports: [

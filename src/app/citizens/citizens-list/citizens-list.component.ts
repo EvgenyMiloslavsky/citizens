@@ -14,18 +14,26 @@ export class CitizensListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.citizensService.getCitizens().subscribe(
-      data => {
-        console.log(data);
-        this.citizens = data.map(c => {
-            return {
-              id: c.payload.doc.id,
-              ...c.payload.doc.data() as {}
-            } as Citizen;
-          }
-        );
-      }
+      c => this.citizens = c
     );
+
+
+    /*
+            this.citizensService.getCitizens().subscribe(
+              data => {
+                console.log(data);
+                this.citizens = data.map(c => {
+                    return {
+                      id: c.payload.doc.id,
+                      ...c.payload.doc.data() as {}
+                    } as Citizen;
+                  }
+                );
+              }
+            );
+    */
   }
 
 }

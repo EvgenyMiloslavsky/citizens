@@ -1,9 +1,6 @@
-import {Inject, Injectable, NgZone} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {MatDialogRef} from '@angular/material/dialog';
-import {LoginDialogComponent} from './login-dialog/login-dialog.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {FirebaseApp, FirebaseAppConfig} from '@angular/fire';
 import {environment} from '../../environments/environment';
 // import {User} from '../models/user.model';
 import {Observable} from 'rxjs';
