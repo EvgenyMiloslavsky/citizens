@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Citizen} from '../models/citizen.model';
 import {Observable, Subject} from 'rxjs';
-import {concatMap, map, mergeMap} from 'rxjs/operators';
-import {citizenRoutes} from '../citizens/citizens.module';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +28,8 @@ export class CitizensService {
             const data = a.payload.doc.data() as Citizen;
             const id = a.payload.doc.id;
             return {id, ...data};
-          }))
+          })
+        )
       );
   }
 

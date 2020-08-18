@@ -1,27 +1,37 @@
 <div class="welcome" fxLayout fxLayoutAlign="center center" style="height: 100%">
   <!--<div class="welcome" fxLayout="column" fxLayout.gt-md="raw" fxFlex="100" fxLayoutAlign="center center" fxLayoutGap.gt-md="20px">-->
-  <section fxLayoutAlign="center center" fxFlex="">
 
+  <section fxLayoutAlign="center center" fxFlex="">
+    <h2>All Citizens</h2>
     <mat-selection-list #shoes [multiple]="false" fxFlex="60">
-      <mat-list-option *ngFor="let citizen of citizens">
+      <mat-list-option *ngFor="let citizen of citizens$ | async">
         {{citizen.name}} {{citizen.surName}}
         <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
       </mat-list-option>
     </mat-selection-list>
+  </section>
 
-    <!--
-        <tbody>
-        <ul>
-          <li *ngFor="let citizen of citizens">
-            id: {{citizen.id}}<br>
-            name: {{citizen.name}}<br>
-            surName: {{citizen.surName}}
-          </li>
-        </ul>
-        </tbody>
-    -->
+  <section fxLayoutAlign="center center" fxFlex="">
+    <h2>Citizens With Criminal Records</h2>
+    <mat-selection-list #shoes [multiple]="false" fxFlex="60">
+      <mat-list-option *ngFor="let citizen of citizensWithCriminalRecords$ | async">
+        {{citizen.name}} {{citizen.surName}}
+        <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
+      </mat-list-option>
+    </mat-selection-list>
+  </section>
+
+  <section fxLayoutAlign="center center" fxFlex="">
+    <h2>Citizens With Double CitizenShip</h2>
+    <mat-selection-list #shoes [multiple]="false" fxFlex="60">
+      <mat-list-option *ngFor="let citizen of citizensWithDoubleCitizenship$ | async">
+        {{citizen.name}} {{citizen.surName}}
+        <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
+      </mat-list-option>
+    </mat-selection-list>
   </section>
 </div>
+<!--
 <div fxLayout="row" fxLayoutAlign="center center">
   <mat-accordion fxFlex="60">
     <mat-expansion-panel hideToggle fxLayout="column" >
@@ -53,3 +63,4 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+-->

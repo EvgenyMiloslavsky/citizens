@@ -6,6 +6,8 @@ import {AppComponent} from '../app.component';
 import {CitizensResolver} from './citizens.resolver';
 import {EffectsModule} from '@ngrx/effects';
 import {CitizensEffects} from './citizens.effects';
+import {StoreModule} from '@ngrx/store';
+import {citizensReducer} from './reducers/citizen.reducers';
 
 
 export const citizenRoutes: Routes = [
@@ -25,7 +27,8 @@ export const citizenRoutes: Routes = [
     SharedModule,
     // RouterModule.forChild([{path: '', component: CitizensListComponent}])
     RouterModule.forChild(citizenRoutes),
-    EffectsModule.forFeature([CitizensEffects])
+    EffectsModule.forFeature([CitizensEffects]),
+    StoreModule.forFeature('citizens', citizensReducer)
   ],
   providers: [
     CitizensResolver

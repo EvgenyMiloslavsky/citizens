@@ -17,7 +17,6 @@ export class CitizensEffects {
         ),
         // map(citizens => allCitizensLoaded({citizens}))
         map(citizens => allCitizensLoaded({citizens}))
-
       )
   );
 
