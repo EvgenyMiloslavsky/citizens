@@ -1,66 +1,41 @@
-<div class="welcome" fxLayout fxLayoutAlign="center center" style="height: 100%">
-  <!--<div class="welcome" fxLayout="column" fxLayout.gt-md="raw" fxFlex="100" fxLayoutAlign="center center" fxLayoutGap.gt-md="20px">-->
+<!--
+<div class="welcome" >
 
-  <section fxLayoutAlign="center center" fxFlex="">
+  <section >
     <h2>All Citizens</h2>
-    <mat-selection-list #shoes [multiple]="false" fxFlex="60">
+    <mat-selection-list #shoes [multiple]="false" >
       <mat-list-option *ngFor="let citizen of citizens$ | async">
         {{citizen.name}} {{citizen.surName}}
-        <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
+        &lt;!&ndash;        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">&ndash;&gt;
       </mat-list-option>
     </mat-selection-list>
   </section>
-
-  <section fxLayoutAlign="center center" fxFlex="">
-    <h2>Citizens With Criminal Records</h2>
-    <mat-selection-list #shoes [multiple]="false" fxFlex="60">
-      <mat-list-option *ngFor="let citizen of citizensWithCriminalRecords$ | async">
-        {{citizen.name}} {{citizen.surName}}
-        <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
-      </mat-list-option>
-    </mat-selection-list>
-  </section>
-
-  <section fxLayoutAlign="center center" fxFlex="">
-    <h2>Citizens With Double CitizenShip</h2>
-    <mat-selection-list #shoes [multiple]="false" fxFlex="60">
-      <mat-list-option *ngFor="let citizen of citizensWithDoubleCitizenship$ | async">
-        {{citizen.name}} {{citizen.surName}}
-        <!--        <img src="{{citizen.photo}}" alt="" height="100px" width="100px">-->
-      </mat-list-option>
-    </mat-selection-list>
-  </section>
-</div>
-<!--
-<div fxLayout="row" fxLayoutAlign="center center">
-  <mat-accordion fxFlex="60">
-    <mat-expansion-panel hideToggle fxLayout="column" >
-      <mat-expansion-panel-header [collapsedHeight]="'70px'" [expandedHeight]="'70px'">
+-->
+<div class="accordion">
+  <mat-accordion style="width: 800px">
+    <mat-expansion-panel *ngFor="let citizen of citizens$ | async">
+      <mat-expansion-panel-header>
         <mat-panel-title>
-          Personal data
+          <div class="mat-h1">{{citizen.name}}</div>
+          <div class="mat-h1">{{citizen.surName}}</div>
         </mat-panel-title>
-        <mat-panel-description>
-          Type your name and age
-        </mat-panel-description>
-
-        <mat-icon>account_circle</mat-icon>
-
       </mat-expansion-panel-header>
-
-      <mat-form-field>
-        <mat-label>First name</mat-label>
-        <input matInput>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput type="number" min="1">
-      </mat-form-field>
-
-      <mat-action-row>
-        <button mat-button color="primary">Next</button>
-      </mat-action-row>
+      <div class="container">
+        <div class="column">
+          <h2>Marriage: {{citizen.marriage}}</h2>
+          <h2>Sex: {{citizen.sex}}</h2>
+          <h2>Phone number: {{citizen.phoneNumber}}</h2>
+        </div>
+        <div class="column">
+          <h2 *ngFor="let citizenship of citizen.citizenShip; index as i ">
+            Citizenship {{citizen.citizenShip.length > 1 ? ('#' + i + 1) :''}}: {{citizenship}}
+          </h2>
+        </div>
+        <div class="column">
+          <img src="{{citizen.photo}}" alt="" height="100px" width="100px">
+          <button mat-raised-button color="primary" (click)="onClick()">Edit</button>
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
--->

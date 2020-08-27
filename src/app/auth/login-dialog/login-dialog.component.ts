@@ -79,7 +79,7 @@ export class LoginDialogComponent {
               this.spinnerService.hide();
               this.store.dispatch(login({user}));
               console.log(`Result ${user.email}`);
-              this.router.navigateByUrl('/citizen');
+              this.router.navigateByUrl('/citizens');
               this.dialogRef.close();
             }, 3000
           );

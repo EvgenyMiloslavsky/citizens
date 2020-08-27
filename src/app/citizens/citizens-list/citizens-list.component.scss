@@ -1,0 +1,21 @@
+mat-accordion {
+  width: 80vw;
+
+}
+.accordion{
+  padding: 50px;
+}
+
+.container {
+  display: flex;
+  //padding: 1em;
+  //flex: 1;
+  max-width: 100%;
+  //background-color: grey;
+}
+
+.column {
+  //border: black 1px solid;
+  flex: 1;
+  padding: 2em;
+}
