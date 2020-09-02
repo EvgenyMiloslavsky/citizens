@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {isLoggedIn, isLoggedOut} from '../../auth/auth.selectors';
 import {logout} from '../../auth/auth.actions';
+import {AddDialogComponent} from '../../add-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -55,5 +56,20 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.store.dispatch(logout());
+  }
+
+  openAddDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+
+    dialogConfig.position = {
+      top: '50px'
+    };
+    dialogConfig.height = '500px';
+    dialogConfig.minWidth = '700px';
+
+    this.dialog.open(AddDialogComponent, dialogConfig);
+
   }
 }

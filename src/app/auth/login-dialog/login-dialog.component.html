@@ -1,6 +1,5 @@
 <h1 mat-dialog-title>Log In Form </h1>
-<div mat-dialog-content>
-  <form [formGroup]="form">
+<div mat-dialog-content [formGroup] = 'form'>
     <mat-form-field>
       <input matInput type="email" formControlName="email" placeholder="Email" (focus)="requestError=false">
       <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
@@ -9,8 +8,7 @@
       <input matInput type="password" formControlName="password" placeholder="Password" (focus)="requestError=false">
       <mat-error *ngIf="password.invalid">{{getPasswordEmailErrorMessage()}}</mat-error>
     </mat-form-field>
-  </form>
-</div>
+`</div>
 
 <mat-progress-bar *ngIf="onProgress" mode="indeterminate"></mat-progress-bar>
 <mat-error *ngIf="requestError">Wrong email or password</mat-error>

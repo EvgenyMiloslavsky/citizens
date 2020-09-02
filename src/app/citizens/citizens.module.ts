@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../modules/shared.module';
-import {RouterModule, Routes} from '@angular/router';
 import {CitizensListComponent} from './citizens-list/citizens-list.component';
 import {CitizensResolver} from './citizens.resolver';
 import {EffectsModule} from '@ngrx/effects';

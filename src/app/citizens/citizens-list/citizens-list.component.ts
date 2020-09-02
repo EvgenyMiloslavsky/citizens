@@ -19,13 +19,13 @@ export class CitizensListComponent implements OnInit {
   allCitizens$: Observable<Citizen[]>;
   citizensWithDoubleCitizenship$: Observable<Citizen[]>;
   citizensWithCriminalRecords$: Observable<Citizen[]>;
-  url: Observable<NavigationEnd>;
+  url$: Observable<NavigationEnd>;
 
   constructor(
     private citizensService: CitizensService,
     private store: Store<AppState>,
     private router: Router) {
-    this.url = this.router.events
+    this.url$ = this.router.events
       .pipe(filter(
         event => event instanceof NavigationEnd
       )) as Observable<NavigationEnd>;
@@ -41,7 +41,7 @@ export class CitizensListComponent implements OnInit {
     this.citizensWithDoubleCitizenship$ = this.store.pipe(select(selectCitizensWithDoubleCitizenship));
     this.citizensWithCriminalRecords$ = this.store.pipe(select(selectCitizensWithCriminalRecords));
 
-    this.url.subscribe(ev => {
+    this.url$.subscribe(ev => {
       console.log('Navigation End!', ev.url);
       console.log('URL >>>>>', ev.url);
       const currentUrl = ev.toString();

@@ -15,9 +15,10 @@
   <mat-accordion style="width: 800px">
     <mat-expansion-panel *ngFor="let citizen of citizens$ | async">
       <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-panel-title [ngClass]="{'criminal': citizen.criminalRecords != null}">
           <div class="mat-h1">{{citizen.name}}</div>
           <div class="mat-h1">{{citizen.surName}}</div>
+          <div class="mat-h1">{{citizen.dateOfBirth}}</div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="container">
@@ -28,11 +29,11 @@
         </div>
         <div class="column">
           <h2 *ngFor="let citizenship of citizen.citizenShip; index as i ">
-            Citizenship {{citizen.citizenShip.length > 1 ? ('#' + i + 1) :''}}: {{citizenship}}
+            Citizenship {{citizen.citizenShip.length > 1 ? ('#' + i + 1) : ''}}: {{citizenship}}
           </h2>
         </div>
         <div class="column">
-          <img src="{{citizen.photo}}" alt="" height="100px" width="100px">
+          <img src="{{citizen.photo}}" alt="" height="100px" width="100px"><br>
           <button mat-raised-button color="primary" (click)="onClick()">Edit</button>
         </div>
       </div>
