@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
     dialogConfig.position = {
       top: '50px'
     };
-    dialogConfig.height = '500px';
+    dialogConfig.height = '510px';
     dialogConfig.minWidth = '700px';
 
     this.dialog.open(AddDialogComponent, dialogConfig);

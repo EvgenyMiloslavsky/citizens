@@ -26,12 +26,16 @@ export class AddDialogComponent implements OnInit {
       '', [Validators.required]),
     citizenship: new FormControl(
       '', [Validators.required]),
-    selectSexControl: new FormControl('', Validators.required)
+    gender: new FormControl(
+      '', [Validators.required])
   });
   requestError = false;
-  citizenships = new Observable<string[]>() ;
+  // citizenships = new Observable<string[]>();
+  citizenships: string[] = [];
   selected = 'option1';
   citizenship = '';
+  citizenshipAddState = false;
+  gender: string;
 
   constructor(private dialogRef: MatDialogRef<AddDialogComponent>) {
   }
@@ -52,11 +56,14 @@ export class AddDialogComponent implements OnInit {
   }
 
   addCitizenship(citizenship: string) {
-    /*if (this.citizenships) {
-      if (this.citizenships.length < 2) {
-        this.citizenships.push(citizenship);
-        this.citizenship = '';
+    console.log('Add Button', citizenship);
+    if (this.citizenship) {
+      this.citizenships.push(citizenship);
+      if (this.citizenships.length == 2) {
+        this.citizenshipAddState = true;
       }
-    }*/
+
+    }
+    this.citizenship = '';
   }
 }

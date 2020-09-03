@@ -11,6 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {AuthService} from '../auth/auth.service';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
 
 const dialogMock = {
   close: () => { }
@@ -29,7 +30,8 @@ const dialogMock = {
     MatExpansionModule,
     MatDialogModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule
   ],
   exports: [
     MatSidenavModule,
@@ -42,7 +44,8 @@ const dialogMock = {
     MatExpansionModule,
     MatDialogModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule
   ],
   providers: [
     {

@@ -29,3 +29,15 @@ mat-dialog-content, {
   flex: 0 0 auto;
   align-self: auto;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.radio-group{
+  margin: 15px 0 15px 0;
+
+  label{
+    margin-right: 10px;
+  }
+}
