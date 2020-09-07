@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Citizen} from '../models/citizen.model';
 import {Observable, Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {debounce, debounceTime, map, take} from 'rxjs/operators';
+import {AbstractControl, ValidationErrors} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,24 @@ export class CitizensService {
             const id = a.payload.doc.id;
             return {id, ...data};
           })
+        )
+      );
+  }
+
+  isEmailExist(email: AbstractControl): Observable<any | null> {
+    console.log(email);
+    return this.firestore.collection(
+      'citizens', ref => ref.where(
+        'email', '==', email)
+    )
+      .valueChanges()
+      .pipe(
+        debounceTime(500),
+        take(1),
+        map(arr => {
+            console.log(arr);
+            return arr.length ? {emailAvailable: false} : null;
+          }
         )
       );
   }

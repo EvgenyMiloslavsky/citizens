@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component} from '@angular/core';
+import {MatDialogRef} from '@angular/material/dialog';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {SpinnerService} from '../../services/spinner.service';
 import {Router} from '@angular/router';
@@ -9,7 +9,6 @@ import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
 import {tap} from 'rxjs/operators';
 import {noop} from 'rxjs';
-import {Citizen} from '../../models/citizen.model';
 
 @Component({
   selector: 'app-login-dialog',
@@ -31,11 +30,6 @@ export class LoginDialogComponent {
 
   onProgress = false;
   requestError = false;
-
-
-  // user = new User();
-  // onProgress = this.spinnerService.visibility.subscribe(vis=>
-  // );
 
   constructor(
     private authService: AuthService,

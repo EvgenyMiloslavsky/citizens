@@ -7,76 +7,65 @@
       <input matInput
              formControlName="name"
              placeholder="Name:"
-      >
+             required>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput
              formControlName="surname"
-             placeholder="Surname"/>
+             placeholder="Surname:"
+             required/>
     </mat-form-field>
 
     <mat-form-field>
       <input type="email" matInput
              formControlName="email"
              placeholder="Email:"
-      >
+             required/>
+      <mat-error *ngIf="!f.email.hasError('emailAvailable')">
+        User with email address already exists
+      </mat-error>
     </mat-form-field>
 
     <div class="radio-group">
       <label>Sex: </label>
       <mat-radio-group aria-label="Select an option"
                        color="primary"
-                       formControlName="gender">
+                       formControlName="gender"
+                       required>
         <mat-radio-button value="male">Male</mat-radio-button>
         <mat-radio-button value="female">Female</mat-radio-button>
       </mat-radio-group>
     </div>
 
     <mat-form-field color="primary">
-      <mat-label>Date Of Birth</mat-label>
+      <mat-label>Date Of Birth:</mat-label>
       <input matInput [matDatepicker]="picker1"
              formControlName="dateOfBirth"
-             placeholder="Date Of Birth:">
+             placeholder="Date Of Birth:"
+             required>
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
-
-      <!-- <input matInput
-              formControlName="dateOfBirth"
-              placeholder="Date Of Birth:">-->
     </mat-form-field>
 
     <mat-form-field>
       <input matInput
              formControlName="phoneNum"
-             placeholder="Phone Num:">
+             placeholder="Phone Num:"
+             required>
     </mat-form-field>
   </div>
-  <div class="dialogColumn">
 
+  <div class="dialogColumn">
     <mat-form-field>
-      <mat-label>Marital Status</mat-label>
-      <mat-select [(value)]="selected" formControlName="marriage">
+      <mat-label>Marital Status:</mat-label>
+      <mat-select [(value)]="selected" formControlName="marriage" required>
         <mat-option value="unmarried">Unmarried</mat-option>
         <mat-option value="married">Married</mat-option>
         <mat-option value="divorced">Divorced</mat-option>
         <mat-option value="widowed">Widowed</mat-option>
       </mat-select>
     </mat-form-field>
-
-<!--
-    <mat-form-field>
-      <mat-label>Marital Status</mat-label>
-      <select
-        matNativeControl
-        formControlName="marriage">
-        <option value="unmarried">Unmarried</option>
-        <option value="married">Married</option>
-        <option value="divorced">Divorced</option>
-        <option value="widowed">Widowed</option>
-      </select>
-    </mat-form-field>
--->
 
     <mat-form-field appearance="outline">
       <textarea matInput
@@ -89,7 +78,7 @@
       <mat-form-field class="citizenship-item">
         <input matInput
                formControlName="citizenship"
-               placeholder="Citizenship" [(ngModel)]="citizenship">
+               placeholder="Citizenship:" [(ngModel)]="citizenship" [required]="!this.citizenships.length">
       </mat-form-field>
       <div class="citizenship-item">
         <button mat-mini-fab
@@ -100,7 +89,7 @@
         </button>
       </div>
     </div>
-    <p *ngFor="let citizenship of citizenships">{{citizenship}}</p>
+    <p *ngFor="let citizenship of citizenships; index as i">&#8226; {{citizenship}}</p>
   </div>
 </mat-dialog-content>
 
