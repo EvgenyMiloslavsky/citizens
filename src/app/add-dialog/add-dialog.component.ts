@@ -13,57 +13,24 @@ import {CitizensService} from '../services/citizens.service';
 export class AddDialogComponent implements OnInit {
 
   form: FormGroup;
-  /*name = new FormControl(
-    '', [Validators.required]);
-  surname = new FormControl(
-    '', [Validators.required]);
-  email = new FormControl(
-    '', [Validators.required, Validators.email]);
-  dateOfBirth = new FormControl(
-    '', [Validators.required]);
-  marriage = new FormControl(
-    '', [Validators.required]);
-  phoneNum = new FormControl(
-    '', [Validators.required]);
-  criminal = new FormControl(
-    '');
-  citizenship = new FormControl(
-    '', [Validators.required]);
-  gender = new FormControl(
-    '', [Validators.required]);*/
-
-  /*  form: FormGroup = new FormGroup({
-      name: new FormControl(
-        '', [Validators.required]),
-      surname: new FormControl(
-        '', [Validators.required]),
-      email: new FormControl(
-        '', [Validators.required, Validators.email], this.validateNameViaServer.bind(this)),
-      dateOfBirth: new FormControl(
-        '', [Validators.required]),
-      marriage: new FormControl(
-        '', [Validators.required]),
-      phoneNum: new FormControl(
-        '', [Validators.required]),
-      criminal: new FormControl(
-        ''),
-      citizenship: new FormControl(
-        '', [Validators.required]),
-      gender: new FormControl(
-        '', [Validators.required])
-    });*/
   requestError = false;
   citizenships: string[] = [];
   selected = 'option1';
   citizenship = '';
   citizenshipAddState = false;
   gender: string;
-
+  minDate: Date;
+  maxDate: Date;
 
   constructor(
     private dialogRef: MatDialogRef<AddDialogComponent>,
     private fb: FormBuilder,
     private service: CitizensService) {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDate();
+    this.maxDate = new Date(currentYear - 18, currentMonth + 1, currentDay + 1);
+    console.log(this.maxDate);
   }
 
   ngOnInit(): void {
@@ -122,7 +89,5 @@ export class AddDialogComponent implements OnInit {
   validateCitizenship(value: AbstractControl) {
     return this.citizenships.length ? null : {citizenshipsAvailable: false};
   }
-
-
 }
 

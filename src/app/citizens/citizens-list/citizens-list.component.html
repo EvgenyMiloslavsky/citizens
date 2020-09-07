@@ -16,9 +16,9 @@
     <mat-expansion-panel *ngFor="let citizen of citizens$ | async">
       <mat-expansion-panel-header>
         <mat-panel-title [ngClass]="{'criminal': citizen.criminalRecords != null}">
-          <div class="mat-h1">{{citizen.name}}</div>
-          <div class="mat-h1">{{citizen.surName}}</div>
-          <div class="mat-h1">{{citizen.dateOfBirth}}</div>
+          <div class="mat-h3">{{citizen.name}}</div>
+          <div class="mat-h3">{{citizen.surName}}</div><br>
+          <div class="mat-h3">{{citizen.dateOfBirth}}</div>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="container">

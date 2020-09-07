@@ -12,6 +12,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {AuthService} from '../auth/auth.service';
 import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import {MatOptionModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 const dialogMock = {
   close: () => { }
@@ -31,7 +35,11 @@ const dialogMock = {
     MatDialogModule,
     MatInputModule,
     MatProgressBarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatOptionModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   exports: [
     MatSidenavModule,
@@ -45,7 +53,11 @@ const dialogMock = {
     MatDialogModule,
     MatInputModule,
     MatProgressBarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatOptionModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   providers: [
     {

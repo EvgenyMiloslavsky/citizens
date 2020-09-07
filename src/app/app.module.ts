@@ -23,7 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {EffectsModule} from '@ngrx/effects';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {AddDialogComponent} from './add-dialog/add-dialog.component';
-import {MatOptionModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatOptionModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
@@ -64,12 +64,9 @@ import {MatRadioModule} from '@angular/material/radio';
       stateKey: 'router',
       routerState: RouterState.Minimal
     }),
-    MatOptionModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatRadioModule
   ],
-  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
   ],
   bootstrap: [AppComponent]
 })
