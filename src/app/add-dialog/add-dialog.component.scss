@@ -2,42 +2,43 @@
   display: block;
 }
 
-button{
-  flex: auto;
-}
-
-mat-dialog-content, {
-  display: flex;
-}
-
-.citizenship-container{
-    display: flex;
-  }
-
-.dialogColumn{
-  flex: 1;
-  margin: 10px;
-}
-
-.citizenship-item:nth-child(1){
-  order: 0;
-  flex: 4 0 auto;
-  align-self: auto;
-}
-.citizenship-item:nth-child(2){
-  order: 0;
-  flex: 0 0 auto;
-  align-self: auto;
-}
-
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
 
-.radio-group{
-  margin: 15px 0 15px 0;
-
-  mat-label{
-    margin-right: 10px;
-  }
+mat-dialog-content{
+  //overflow-y: hidden !important;
 }
+
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+  align-items: flex-start;
+}
+
+.flex-item > mat-dialog-actions{
+  align-content: center;
+}
+
+.flex-item:nth-child(1) {
+  order: 0;
+  flex: 1 0 auto;
+  align-self: auto;
+}
+
+.flex-item:nth-child(2) {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+}
+
+.flex-item:nth-child(3) {
+  order: 0;
+  flex: 0 1 100%;
+  align-self: auto;
+}
+

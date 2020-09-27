@@ -10,7 +10,6 @@ import {SidenavComponent} from './navigation/sidenav/sidenav.component';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {CitizensListComponent} from './citizens/citizens-list/citizens-list.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SharedModule} from './modules/shared.module';
 import {LoginDialogComponent} from './auth/login-dialog/login-dialog.component';
@@ -23,11 +22,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {EffectsModule} from '@ngrx/effects';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {AddDialogComponent} from './add-dialog/add-dialog.component';
-import {MAT_DATE_LOCALE, MatOptionModule} from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
-import {MatRadioModule} from '@angular/material/radio';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -67,6 +64,7 @@ import {MatRadioModule} from '@angular/material/radio';
   ],
   providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

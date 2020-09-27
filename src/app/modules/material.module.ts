@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -11,11 +10,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {AuthService} from '../auth/auth.service';
-import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOptionModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+
 
 const dialogMock = {
   close: () => { }
@@ -39,7 +39,8 @@ const dialogMock = {
     MatOptionModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    // NgxMatFileInputModule
   ],
   exports: [
     MatSidenavModule,
@@ -57,7 +58,8 @@ const dialogMock = {
     MatOptionModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    // NgxMatFileInputModule
   ],
   providers: [
     {
