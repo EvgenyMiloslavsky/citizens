@@ -23,13 +23,17 @@ export class AddDialogComponent implements OnInit {
   maxDate: Date;
   submitted = false;
 
+  myfilename: any;
+  file: any;
+
+
   multiple = false;
   color: 'primary';
   accept: '.png, .jpg, .jepg';
 
   addForm = this.fb.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
+      name: ['Geo', Validators.required],
+      surname: ['Mil', Validators.required],
       email: ['', [
         Validators.required,
         // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
@@ -40,12 +44,13 @@ export class AddDialogComponent implements OnInit {
       gender: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       marriage: ['', Validators.required],
-      phoneNum: ['', Validators.required],
+      phoneNum: ['555555555', Validators.required],
       criminal: ['', Validators.maxLength(50)],
       citizenships: new FormArray([
-        new FormControl('', Validators.required)
+        new FormControl('USA', Validators.required)
       ]),
-    },
+      myfilename: ['']
+    }
   );
 
 
@@ -85,7 +90,6 @@ export class AddDialogComponent implements OnInit {
   get citzenships(): FormArray {
     return this.addForm.get('citizenships') as FormArray;
   }
-
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -158,6 +162,7 @@ export class AddDialogComponent implements OnInit {
       this.service.createCitizen(newCitizen)
         .then(r => console.log(r));
       console.log('Submit >>>>>>>');
+      this.service.uploadPictures(this.file);
       this.dialogRef.close();
     }
   }
@@ -165,5 +170,11 @@ export class AddDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+
+  fileChangeEvent(event: any) {
+    console.log();
+    this.file = (event.target as HTMLInputElement).files[0];
+  }
 }
+
 

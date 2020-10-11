@@ -1,176 +1,188 @@
-<mat-dialog-content style="height: 100%">
-  <h1 mat-dialog-title>Add Citizen</h1>
+<!--<mat-dialog-content>-->
+<h1 mat-dialog-title>Add Citizen</h1>
 
-  <form [formGroup]='addForm'
-        (ngSubmit)="onSubmit()"
-        fxLayout="column">
-    <div fxLayout="row"
-         fxLayoutAlign="space-around stretch"
-         fxLayoutGap="20px">
-      <div fxLayout="column"
-           fxLayoutAlign="start stretch"
-           fxFlex="50%">
-
-        <mat-form-field>
-          <mat-label>Name:</mat-label>
-          <input matInput
-                 type="text"
-                 formControlName="name"
-                 #nameInput="matInput"
-                 required>
-          <button mat-button
-                  *ngIf="f?.name.value && nameInput.focus"
-                  matSuffix
-                  mat-icon-button
-                  #nameButton="matButton"
-                  aria-label="Clear"
-                  (click)="f.name.setValue('')">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error *ngIf="name.invalid">
-            <div>Name is required</div>
-          </mat-error>
-
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Surname:</mat-label>
-          <input matInput
-                 type="text"
-                 formControlName="surname"
-                 required>
-          <button mat-button
-                  *ngIf="f?.surname.value"
-                  matSuffix
-                  mat-icon-button
-                  aria-label="Clear"
-                  (click)="addForm.controls.surname.setValue('')">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error *ngIf="surname.invalid">
-            Surname is required
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Email:</mat-label>
-          <input matInput
-                 type="email"
-                 formControlName="email"
-                 required>
-          <button mat-button
-                  *ngIf="f?.email.value"
-                  matSuffix
-                  mat-icon-button
-                  aria-label="Clear"
-                  (click)="f.email.setValue('')">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
-
-        <div class="radio-group">
-          <!--        <mat-label>Sex:</mat-label>-->
-          <mat-radio-group aria-label="Select an option"
-                           color="primary"
-                           formControlName="gender"
-                           required>
-            <mat-radio-button value="male">Male</mat-radio-button>
-            <mat-radio-button value="female">Female</mat-radio-button>
-            <mat-error *ngIf="submitted && f.gender.errors">
-              <div>Please select gender</div>
-            </mat-error>
-          </mat-radio-group>
-        </div>
-
-        <mat-form-field color="primary">
-          <mat-label>Date Of Birth:</mat-label>
-          <input matInput [matDatepicker]="picker1"
-                 formControlName="dateOfBirth"
-                 placeholder="Date Of Birth:"
-                 required
-                 [max]=maxDate>
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-          <mat-error *ngIf="submitted">
-            <div>Date of birth is required</div>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput
-                 formControlName="phoneNum"
-                 placeholder="Phone Num:"
-                 required>
-          <mat-error *ngIf="submitted && f.phoneNum.errors">
-            <div> Phone number is required</div>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Marital Status:</mat-label>
-          <mat-select [(value)]="selected" formControlName="marriage" required>
-            <mat-option value="unmarried">Unmarried</mat-option>
-            <mat-option value="married">Married</mat-option>
-            <mat-option value="divorced">Divorced</mat-option>
-            <mat-option value="widowed">Widowed</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-      </div>
-      <div fxLayout="column"
-           fxLayoutAlign="start stretch"
-           fxFlex="50%">
-        <mat-form-field appearance="outline">x
-          <textarea matInput
-                    style="height: 106px"
-                    formControlName="criminal"
-                    placeholder="Criminal records:"></textarea>
-        </mat-form-field>
-        <div formArrayName="citizenships">
-          <mat-form-field *ngFor="let citizenship of citzenships?.controls; index as i">
-            <input matInput
-                   type="text"
-                   [formControlName]="i"
-                   placeholder="Citizenship #{{i+1}}:"
-                   [required]="i == 0"/>
-            <div class="example-button-container">
-              <mat-icon *ngIf="i > 0"
-                        style="cursor: pointer"
-                        color="primary"
-                        aria-label="Example icon button with a minus one icon"
-                        (click)="removeCitizenship(i)">remove_circle_outline
-              </mat-icon>
-            </div>
-            <mat-error *ngIf="i == 0 && citizenship.invalid">Citizenship is required</mat-error>
-          </mat-form-field>
-        </div>
-        <button *ngIf="citzenships.controls[0]"
-                mat-raised-button color="accent"
-                (click)="addCitizenships()"
-                [disabled]="citzenships.length >= 3">Add
-          Citizenship
+<form [formGroup]='addForm'
+      (ngSubmit)="onSubmit()"
+      class="form">
+  <div class="row">
+    <div class="column">
+      <mat-form-field>
+        <mat-label>Name:</mat-label>
+        <input matInput
+               type="text"
+               formControlName="name"
+               #nameInput="matInput"
+               required>
+        <button mat-button
+                *ngIf="f?.name.value && nameInput.focus"
+                matSuffix
+                mat-icon-button
+                #nameButton="matButton"
+                aria-label="Clear"
+                (click)="f.name.setValue('')">
+          <mat-icon>close</mat-icon>
         </button>
-      </div>
-    </div>
-<!--    <div fxLayout="row"-->
-<!--         fxLayoutAlign="center center">-->
-<!--      <mat-form-field>-->
+        <mat-error *ngIf="name.invalid">
+          <div>Name is required</div>
+        </mat-error>
 
-<!--      </mat-form-field>-->
-<!--    </div>-->
-    <div fxLayout="row"
-         fxLayoutAlign="center center"
-         fxFlex="100%">
-      <div mat-dialog-actions>
-        <button
-          mat-raised-button
-          color="primary"
-          autofocus
-          type="submit">Add
-        </button>&nbsp;
-        <button class="mat-raised-button" (click)="close()">Close</button>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Surname:</mat-label>
+        <input matInput
+               type="text"
+               formControlName="surname"
+               required>
+        <button mat-button
+                *ngIf="f?.surname.value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="addForm.controls.surname.setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="surname.invalid">
+          Surname is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email:</mat-label>
+        <input matInput
+               type="email"
+               formControlName="email"
+               required>
+        <button mat-button
+                *ngIf="f?.email.value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="f.email.setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <div class="radio-group">
+        <mat-radio-group aria-label="Select an option"
+                         color="primary"
+                         formControlName="gender"
+                         required>
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+          <mat-error *ngIf="submitted && f.gender.errors">
+            <div>Please select gender</div>
+          </mat-error>
+        </mat-radio-group>
       </div>
+
+      <mat-form-field color="primary">
+        <mat-label>Date Of Birth:</mat-label>
+        <input matInput [matDatepicker]="picker1"
+               formControlName="dateOfBirth"
+               placeholder="Date Of Birth:"
+               required
+               [max]=maxDate>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="submitted">
+          <div>Date of birth is required</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput
+               formControlName="phoneNum"
+               placeholder="Phone Num:"
+               required>
+        <mat-error *ngIf="submitted && f.phoneNum.errors">
+          <div> Phone number is required</div>
+        </mat-error>
+      </mat-form-field>
+
+
     </div>
-  </form>
-</mat-dialog-content>
+    <div class="column">
+      <mat-form-field>
+        <mat-label>Marital Status:</mat-label>
+        <mat-select [(value)]="selected" formControlName="marriage" required>
+          <mat-option value="unmarried">Unmarried</mat-option>
+          <mat-option value="married">Married</mat-option>
+          <mat-option value="divorced">Divorced</mat-option>
+          <mat-option value="widowed">Widowed</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="criminal-text-area">
+        <textarea matInput
+                  formControlName="criminal"
+                  placeholder="Criminal records:">
+
+        </textarea>
+      </mat-form-field>
+
+      <div formArrayName="citizenships"
+           class="citizenship-container">
+        <mat-form-field *ngFor="let citizenship of citzenships?.controls; index as i"
+                        class="citizenship">
+          <input matInput
+                 type="text"
+                 [formControlName]="i"
+                 placeholder="Citizenship #{{i+1}}:"
+                 [required]="i == 0"/>
+          <mat-icon *ngIf="i > 0"
+                    style="cursor: pointer"
+                    color="primary"
+                    (click)="removeCitizenship(i)"
+                    matSuffix>remove_circle_outline
+          </mat-icon>
+          <mat-error *ngIf="i == 0 && citizenship.invalid">Citizenship is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="addCitizenships()"
+        [disabled]="(citzenships.length >= 3)"
+        class="add-citizen-button">
+        Add Citizenship
+      </button>
+    </div>
+  </div>
+  <mat-form-field>
+
+    <div class="myfilebrowser">
+
+      <mat-toolbar>
+
+        <!-- Readonly Input to show File names -->
+        <input matInput formControlName="myfilename" placeholder="Select File" readonly name="memberContactNo" />
+
+        <!-- Browse Button -->
+        <button mat-flat-button color="primary">
+          Browse
+        </button>
+
+      </mat-toolbar>
+
+      <!-- Fetch selected filed on change -->
+      <input type="file" #UploadFileInput id="fileUpload" (change)="fileChangeEvent($event)" name="fileUpload"
+             multiple="multiple" accept=".png,.jpg" />
+
+    </div>
+
+  </mat-form-field>
+  <div mat-dialog-actions class="from-action">
+    <button
+      mat-raised-button
+      color="primary"
+      autofocus
+      type="submit">Add
+    </button>&nbsp;
+    <button class="mat-raised-button" (click)="close()">Close</button>
+  </div>
+</form>
+<!--</mat-dialog-content>-->
 

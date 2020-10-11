@@ -15,7 +15,7 @@ import {SharedModule} from './modules/shared.module';
 import {LoginDialogComponent} from './auth/login-dialog/login-dialog.component';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthModule} from './auth/auth.module';
 import {metaReducers, reducers} from './reducers';
 import {HttpClientModule} from '@angular/common/http';
@@ -61,6 +61,7 @@ import {DatePipe} from '@angular/common';
       stateKey: 'router',
       routerState: RouterState.Minimal
     }),
+    FormsModule,
   ],
   providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},

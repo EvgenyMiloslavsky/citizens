@@ -1,3 +1,94 @@
+form{
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  height: 28rem;
+}
+
+.mat-dialog-title {
+  text-align: center;
+}
+
+.column {
+  flex: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.column > *{
+  width: 25rem;
+  padding: .25rem 1.25rem;
+}
+
+.radio-group {
+  margin: 1rem 0 .75rem 0;
+
+  mat-radio-button:nth-child(2) {
+    padding-left: 1rem;
+  }
+}
+
+.from-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.citizenship {
+  width: 100%;
+  padding: .25rem 0;
+}
+
+.criminal-text-area{
+  margin-bottom: -18xp;
+}
+
+.add-citizen-button {
+  width: 200px !important;
+}
+
+.myfilebrowser{
+  //margin: 50px;
+  width: 350px;
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .mat-toolbar-single-row {
+    height: auto !important;
+    background: transparent;
+
+    button {
+      width: 30%;
+    }
+  }
+}
+
+#fileUpload {
+  position: absolute;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+
+
+/*.mat-dialog-content {
+  max-height: initial;
+}*/
+
+/*
 .mat-form-field{
   display: block;
 }
@@ -42,3 +133,4 @@ mat-dialog-content{
   align-self: auto;
 }
 
+*/

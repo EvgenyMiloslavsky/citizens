@@ -16,9 +16,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 
-
 const dialogMock = {
-  close: () => { }
+  close: () => {
+  }
 };
 
 @NgModule({
@@ -40,7 +40,7 @@ const dialogMock = {
     MatDatepickerModule,
     MatSelectModule,
     MatRadioModule,
-    // NgxMatFileInputModule
+    // MaterialFileInputModule
   ],
   exports: [
     MatSidenavModule,
@@ -59,12 +59,11 @@ const dialogMock = {
     MatDatepickerModule,
     MatSelectModule,
     MatRadioModule,
-    // NgxMatFileInputModule
+    // MaterialFileInputModule
   ],
   providers: [
-    {
-      provide: MatDialogRef,
-      useValue: dialogMock    },
+    {provide: MatDialogRef, useValue: dialogMock},
+    // { provide: NGX_MAT_FILE_INPUT_CONFIG, useValue: config },
     AuthService
   ]
 })
