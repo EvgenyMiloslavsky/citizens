@@ -7,5 +7,10 @@ export const loadAllCitizens = createAction(
 
 export const allCitizensLoaded = createAction(
   '[Load citizens Effect] All Courses Loaded',
-  props<{citizens: Citizen[]}>()
+  props<{ citizens: Citizen[] }>()
+);
+
+export const deleteCitizen = createAction(
+  '[Delete Citizen] Delete Citizen by Id',
+  props<{ id: string }>()
 );

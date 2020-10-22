@@ -1,12 +1,17 @@
 <div class="accordion">
-  <mat-accordion style="width: 800px">
-    <mat-expansion-panel *ngFor="let citizen of citizens$ | async">
-      <mat-expansion-panel-header>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let citizen of citizens$ | async"
+                         [disabled]="clickButton"
+                         (click)="clickButton=false">
+      <mat-expansion-panel-header [expandedHeight]="'70px'" [collapsedHeight]="'70px'">
         <mat-panel-title [ngClass]="{'criminal': citizen.criminalRecords != null}">
-          <div class="mat-h3">{{citizen.name}}</div>
-          <div class="mat-h3">{{citizen.surName}}</div><br>
-          <div class="mat-h3">{{citizen.dateOfBirth}}</div>
+          <div class="mat-h3 title-item">{{citizen.name}}</div>
+          <div class="mat-h3 title-item">{{citizen.surname}}</div>
         </mat-panel-title>
+        <mat-panel-description>
+          <span class="mat-h3 title-item">{{citizen.dateOfBirth}}</span>
+        </mat-panel-description>
+        <button mat-raised-button color="warn" (click)="deleteItem(citizen.id)">Delete</button>
       </mat-expansion-panel-header>
       <div class="container">
         <div class="column">

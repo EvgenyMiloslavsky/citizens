@@ -7,6 +7,7 @@ import {CitizensEffects} from './citizens.effects';
 import {StoreModule} from '@ngrx/store';
 import {citizensReducer} from './reducers/citizen.reducers';
 import {CitizensRoutingModule} from './citizens-routing.module';
+import * as fromSpinner from './reducers/spinner.reducer';
 
 
 /*
@@ -30,7 +31,8 @@ export const citizenRoutes: Routes = [
     // RouterModule.forChild(citizenRoutes),
     EffectsModule.forFeature([CitizensEffects]),
     StoreModule.forFeature('citizens', citizensReducer),
-    CitizensRoutingModule
+    CitizensRoutingModule,
+    StoreModule.forFeature(fromSpinner.spinnerFeatureKey, fromSpinner.reducer),
   ],
   providers: [
     CitizensResolver

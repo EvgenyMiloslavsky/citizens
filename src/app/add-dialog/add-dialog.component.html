@@ -86,7 +86,7 @@
                [max]=maxDate>
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
-        <mat-error *ngIf="submitted">
+        <mat-error *ngIf="submitted && dateOfBirth.invalid">
           <div>Date of birth is required</div>
         </mat-error>
       </mat-form-field>
@@ -116,7 +116,7 @@
 
       <mat-form-field appearance="outline" class="criminal-text-area">
         <textarea matInput
-                  formControlName="criminal"
+                  formControlName="criminalRecords"
                   placeholder="Criminal records:">
 
         </textarea>
@@ -151,29 +151,33 @@
       </button>
     </div>
   </div>
-  <mat-form-field>
 
+
+  <!--*****************FILE DOWNLOAD*****************-->
+    <mat-form-field>
     <div class="myfilebrowser">
-
       <mat-toolbar>
-
         <!-- Readonly Input to show File names -->
-        <input matInput formControlName="myfilename" placeholder="Select File" readonly name="memberContactNo" />
+        <input matInput formControlName="photo" placeholder="Select File" readonly name="memberContactNo"/>
 
         <!-- Browse Button -->
         <button mat-flat-button color="primary">
           Browse
         </button>
-
       </mat-toolbar>
 
       <!-- Fetch selected filed on change -->
-      <input type="file" #UploadFileInput id="fileUpload" (change)="fileChangeEvent($event)" name="fileUpload"
-             multiple="multiple" accept=".png,.jpg" />
-
+      <input type="file"
+             #UploadFileInput
+             id="fileUpload"
+             (change)="fileChangeEvent($event)"
+             name="fileUpload"
+             multiple="" accept=".png,.jpg"/>
     </div>
-
   </mat-form-field>
+
+  <mat-progress-bar mode="determinate" [value]="uploadProgress$ | async"></mat-progress-bar>
+
   <div mat-dialog-actions class="from-action">
     <button
       mat-raised-button

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {SpinnerService} from '../../services/spinner.service';
+import {SpinnerService} from '../../citizens/spinner.service';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';

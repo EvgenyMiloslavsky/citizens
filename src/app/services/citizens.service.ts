@@ -2,9 +2,14 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Citizen} from '../models/citizen.model';
 import {Observable, Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {AbstractControl} from '@angular/forms';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
+
+export interface FilesUploadMetadata {
+  uploadProgress$: Observable<number>;
+  downloadUrl$: Observable<string>;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +18,15 @@ export class CitizensService {
 
   // citizens: Observable<Citizen[]>;
   citizsens = new Subject();
+
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
+  uploadState: Observable<string>;
+  uploadProgress: Observable<number>;
+  downloadURL: Observable<string>;
+  mediaFolderPath = 'citizens';
+
+
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) {
   }
 
@@ -48,17 +60,37 @@ export class CitizensService {
     return this.firestore.collection('citizens').add({...citizen});
   }
 
-  uploadPictures(event) {
-    console.log(`File>>> ${event}`);
-    // create a random id
-    const randomId = Math.random().toString(36).substring(2);
-    // console.log(event.target.files[0]);
-    // create a reference to the storage bucket location
-    this.ref = this.storage.ref(`citizens/${randomId}`);
-    // the put method creates an AngularFireUploadTask
-    // and kicks off the upload
-    this.task = this.ref.put(event);
+  uploadPictures(file): FilesUploadMetadata {
+    const id = Math.random().toString(36).substring(2);
+    const ref = this.storage.ref(`${this.mediaFolderPath}/${id}`);
+    const task = ref.put(file.target.files[0]);
+    const uploadProgress = task.percentageChanges();
+    task.snapshotChanges().pipe(
+      finalize(
+        () => this.downloadURL = ref.getDownloadURL()
+      )
+    ).subscribe();
+
+    return {
+      uploadProgress$: uploadProgress,
+      downloadUrl$: this.downloadURL
+    };
   }
+
+  /*
+    uploadPictures(file): Observable<string | null> {
+      const id = Math.random().toString(36).substring(2);
+      this.ref = this.storage.ref(`citizens/${id}`);
+      this.task = this.ref.put(file.target.files[0]);
+      this.uploadProgress = this.task.percentageChanges();
+      this.task.snapshotChanges().pipe(
+        finalize(
+          () => this.downloadURL = this.ref.getDownloadURL()
+        )
+      ).subscribe();
+      return this.downloadURL;
+    }
+  */
 
   updateCitizen(citizen: Citizen) {
     delete citizen.id;

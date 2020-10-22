@@ -25,6 +25,7 @@ import {AddDialogComponent} from './add-dialog/add-dialog.component';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {DatePipe} from '@angular/common';
+import * as fromSpiner from './citizens/reducers/spinner.reducer';
 
 
 @NgModule({
@@ -61,7 +62,7 @@ import {DatePipe} from '@angular/common';
       stateKey: 'router',
       routerState: RouterState.Minimal
     }),
-    FormsModule,
+    FormsModule
   ],
   providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},

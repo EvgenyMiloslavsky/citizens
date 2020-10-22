@@ -1,26 +1,75 @@
-mat-accordion {
-  width: 80vw;
-
-}
-.accordion{
-  padding: 50px;
+.accordion {
+  margin-top: 50px;
+  max-width: 800px;
+  width: 800px;
 }
 
+mat-expansion-panel {
+  width: 100%;
+}
+
+.criminal {
+  color: red;
+}
+
+.title-item {
+  margin-right: .75rem;
+  margin-top: 1rem;
+}
+
+mat-expansion-panel-header button {
+  margin-right: 1rem;
+  height: 2.5rem;
+  margin-top: 0.7rem;
+}
+
+mat-panel-title {
+  flex: 1
+}
+
+mat-panel-description {
+  flex: 1;
+}
+
+
+/*
 .container {
   display: flex;
   //padding: 1em;
   //flex: 1;
-  max-width: 100%;
+  //max-width: 100%;
   //background-color: grey;
 }
 
+!*
 .column {
   //border: black 1px solid;
   flex: 1;
   padding: 2em;
 
 }
+*!
 
-.criminal{
-  color: red;
+
+mat-expansion-panel-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  mat-panel-title{
+    flex-basis: 0;
+  }
+
+  mat-panel-title, mat-panel-description{
+    //margin-bottom: 0;
+    //padding-top:10px;
+  }
+
+  button{
+     margin-right: 1rem;
+  }
 }
+
+
+
+*/

@@ -17,6 +17,10 @@ export const citizensReducer = createReducer(
   on(CitizensActions.allCitizensLoaded,
     (state, action) =>
       adapter.addMany(action.citizens, state)
+  ),
+  on(CitizensActions.deleteCitizen,
+    (state, action) =>
+      adapter.removeOne(action.id, state)
   )
 );
 

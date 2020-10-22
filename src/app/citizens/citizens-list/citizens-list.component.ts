@@ -4,9 +4,10 @@ import {Citizen} from '../../models/citizen.model';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {selectAllCitizens, selectCitizensWithCriminalRecords, selectCitizensWithDoubleCitizenship} from '../sitizens.selector';
+import {selectAllCitizens, selectCitizensWithCriminalRecords, selectCitizensWithDoubleCitizenship} from '../citizens.selector';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import {CitizensActions} from '../actions-type';
 
 @Component({
   selector: 'app-citizens',
@@ -20,6 +21,7 @@ export class CitizensListComponent implements OnInit {
   citizensWithDoubleCitizenship$: Observable<Citizen[]>;
   citizensWithCriminalRecords$: Observable<Citizen[]>;
   url$: Observable<NavigationEnd>;
+  clickButton: boolean;
 
   constructor(
     private citizensService: CitizensService,
@@ -60,5 +62,13 @@ export class CitizensListComponent implements OnInit {
 
   onClick() {
 
+  }
+
+  deleteItem(id: string) {
+    // this.clickButton = true;
+    this.store.dispatch(CitizensActions.deleteCitizen({id}));
+    /*
+        this.citizensService.deleteCitizens(id);
+    */
   }
 }

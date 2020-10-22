@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl, FormArray, FormBuilder, FormControl, ValidationErrors, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {debounceTime, map, take} from 'rxjs/operators';
+import {EMPTY, Observable, Subject} from 'rxjs';
+import {catchError, debounceTime, map, take, takeUntil, tap} from 'rxjs/operators';
 import {CitizensService} from '../services/citizens.service';
 import {Citizen} from '../models/citizen.model';
 import {DatePipe} from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-add-dialog',
@@ -23,8 +25,10 @@ export class AddDialogComponent implements OnInit {
   maxDate: Date;
   submitted = false;
 
-  myfilename: any;
+  fileName: any;
   file: any;
+  uploadProgress$: Observable<number>;
+  destroy$: Subject<null> = new Subject();
 
 
   multiple = false;
@@ -45,11 +49,11 @@ export class AddDialogComponent implements OnInit {
       dateOfBirth: ['', Validators.required],
       marriage: ['', Validators.required],
       phoneNum: ['555555555', Validators.required],
-      criminal: ['', Validators.maxLength(50)],
+      criminalRecords: ['', Validators.maxLength(50)],
       citizenships: new FormArray([
         new FormControl('USA', Validators.required)
       ]),
-      myfilename: ['']
+      photo: ['']
     }
   );
 
@@ -58,7 +62,8 @@ export class AddDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AddDialogComponent>,
     private fb: FormBuilder,
     private service: CitizensService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private snackBar: MatSnackBar
   ) {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
@@ -85,6 +90,10 @@ export class AddDialogComponent implements OnInit {
 
   get email() {
     return this.addForm.get('email');
+  }
+
+  get dateOfBirth() {
+    return this.addForm.get('dateOfBirth');
   }
 
   get citzenships(): FormArray {
@@ -158,12 +167,44 @@ export class AddDialogComponent implements OnInit {
         this.addForm.value
       );
       newCitizen.dateOfBirth = this.datePipe.transform(newCitizen.dateOfBirth, 'dd/MM/yyyy');
-      // newCitizen.citizenShip = this.citizenships;
-      this.service.createCitizen(newCitizen)
-        .then(r => console.log(r));
-      console.log('Submit >>>>>>>');
-      this.service.uploadPictures(this.file);
-      this.dialogRef.close();
+      /*this.service.uploadPictures(this.file)
+        .subscribe(
+          (url) => {
+            newCitizen.photo = url;
+            this.service.createCitizen(newCitizen)
+              .then(r => console.log(r));
+            console.log('Submit >>>>>>>');
+            this.dialogRef.close();
+
+          })      ;
+*/
+      const {downloadUrl$, uploadProgress$} = this.service.uploadPictures(
+        this.file
+      );
+
+      this.uploadProgress$ = uploadProgress$;
+
+      downloadUrl$
+        .pipe(
+          tap(),
+          takeUntil(this.destroy$),
+          catchError((error) => {
+            this.snackBar.open(`${error.message} 😢`, 'Close', {
+              duration: 4000,
+            });
+            return EMPTY;
+          }),
+        )
+        .subscribe((downloadUrl) => {
+          newCitizen.photo = downloadUrl;
+          this.service.createCitizen(newCitizen)
+            .then(r => {
+              console.log(r);
+              this.dialogRef.close();
+            });
+          console.log('Submit >>>>>>>');
+        });
+
     }
   }
 
@@ -171,10 +212,20 @@ export class AddDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  fileChangeEvent(event: any) {
-    console.log();
-    this.file = (event.target as HTMLInputElement).files[0];
+  fileChangeEvent(event) {
+    this.file = event;
+    /*
+        this.file = (event.target as HTMLInputElement).files[0];
+        this.fileName = event.target.files[0].name;
+        console.log(`Event file name ${this.fileName}`);
+    */
   }
+
+  /*
+    onDestroy() {
+
+    }
+  */
 }
 
 
